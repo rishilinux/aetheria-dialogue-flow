@@ -1,9 +1,19 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/Header';
+import { playSound } from '../utils/sounds';
+import { ScrollArea } from '../components/ui/scroll-area';
+import { useNavigate } from 'react-router-dom';
 import '../styles/AboutPage.css';
 
 const AboutPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Play transition sound when component mounts
+    playSound('TRANSITION');
+  }, []);
+
   return (
     <div className="about-page page-transition">
       <Header />
@@ -52,21 +62,25 @@ const AboutPage = () => {
           <h2>Capabilities</h2>
           <div className="capabilities-grid">
             <div className="capability-card">
+              <div className="capability-icon knowledge"></div>
               <h3>Knowledge Base</h3>
               <p>Trained on a diverse range of topics including science, history, arts, and technology.</p>
             </div>
             
             <div className="capability-card">
+              <div className="capability-icon context"></div>
               <h3>Contextual Awareness</h3>
               <p>Maintains conversation context to provide coherent and relevant responses.</p>
             </div>
             
             <div className="capability-card">
+              <div className="capability-icon creative"></div>
               <h3>Creative Assistance</h3>
               <p>Can help with brainstorming, writing, and other creative endeavors.</p>
             </div>
             
             <div className="capability-card">
+              <div className="capability-icon learning"></div>
               <h3>Continuous Learning</h3>
               <p>Improves through interactions and feedback to better serve users' needs.</p>
             </div>
@@ -90,7 +104,23 @@ const AboutPage = () => {
 
         <div className="team-section">
           <h2>Behind Aetheria</h2>
-          <p className="team-intro">Our team consists of AI researchers, engineers, and ethicists committed to advancing conversational AI in a responsible way.</p>
+          <div className="team-grid">
+            <div className="team-card">
+              <div className="team-avatar"></div>
+              <h3>Dr. Sarah Chen</h3>
+              <p>AI Research Lead</p>
+            </div>
+            <div className="team-card">
+              <div className="team-avatar"></div>
+              <h3>Michael Kwame</h3>
+              <p>Machine Learning Engineer</p>
+            </div>
+            <div className="team-card">
+              <div className="team-avatar"></div>
+              <h3>Emma Rodriguez</h3>
+              <p>Ethics & Safety Director</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -98,7 +128,15 @@ const AboutPage = () => {
         <div className="cta-container">
           <h2>Ready to experience Aetheria?</h2>
           <p>Start a conversation and explore what our AI can do for you.</p>
-          <a href="/chat" className="btn btn-primary">Begin Conversation</a>
+          <button 
+            className="btn btn-primary" 
+            onClick={() => {
+              playSound('CLICK');
+              navigate('/chat');
+            }}
+          >
+            Begin Conversation
+          </button>
         </div>
       </div>
 
