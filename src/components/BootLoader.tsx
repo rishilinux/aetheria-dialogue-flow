@@ -2,17 +2,31 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/BootLoader.css';
+import { playSound, preloadSounds } from '../utils/sounds';
 
 const BootLoader = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   
   useEffect(() => {
+    // Preload sounds
+    preloadSounds();
+    
+    // Play boot-up sound
+    playSound('BOOT_UP');
+    
     // Simulate loading progress
     const interval = setInterval(() => {
       setProgress(prev => {
+        // Play transition sound at certain progress points
+        if (prev === 20 || prev === 50 || prev === 80) {
+          playSound('TRANSITION');
+        }
+        
         if (prev >= 100) {
           clearInterval(interval);
+          // Play success sound when loading completes
+          playSound('SUCCESS');
           setTimeout(() => navigate('/landing'), 500);
           return 100;
         }
@@ -37,6 +51,12 @@ const BootLoader = () => {
         <div className="system-text">
           <span>System:</span> {getLoadingMessage(progress)}
         </div>
+      </div>
+      
+      <div className="particles-container">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div key={i} className="particle"></div>
+        ))}
       </div>
     </div>
   );
