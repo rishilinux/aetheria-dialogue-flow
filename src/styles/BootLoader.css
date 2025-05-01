@@ -1,0 +1,82 @@
+
+.boot-loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--primary);
+  color: white;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--secondary), var(--accent));
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.circle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  background-color: var(--primary);
+  border-radius: 50%;
+}
+
+.pulse {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.logo h1 {
+  font-size: 2rem;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+
+.loader-bar-container {
+  width: 60%;
+  max-width: 500px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.loader-bar {
+  height: 100%;
+  background: linear-gradient(to right, var(--secondary), var(--accent));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.loader-text {
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.system-text {
+  margin-top: 0.5rem;
+  font-family: monospace;
+}
+
+.system-text span {
+  color: var(--accent);
+  font-weight: bold;
+}
